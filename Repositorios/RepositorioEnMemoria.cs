@@ -27,7 +27,10 @@ namespace back_end.Repositorios
             return _generos;
         }
         
-        public Genero obtenerGeneroPorId(int Id){
+        public async Task<Genero> obtenerGeneroPorId(int Id){
+            
+            await Task.Delay(3);
+            
             return _generos.FirstOrDefault(x => x.Id == Id);
         }
     }

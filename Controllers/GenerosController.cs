@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 namespace back_end.Controllers
 {
     [Route("api/generos")]
+    [ApiController]
     public class GenerosController : ControllerBase
     {
         private readonly IRepositorio repositorio;
@@ -19,42 +20,40 @@ namespace back_end.Controllers
             this.repositorio = repositorio;
         }
 
-        //! obtener Todos los generos -----------------------------
+        // obtener Todos los generos -----------------------------
         // nota: tiene 2 rutas, ambas funcan
         [HttpGet] //api/generos
         [HttpGet("listado")] //api/generos/listado
-        public List<Genero> Get(){
+        public ActionResult<List<Genero>> Get(){
+            
             return repositorio.obtenerTodosLosGeneros();        
         }
         
-        //! obtener x id ------------------------------------------
+        // obtener x id ------------------------------------------
         [HttpGet("{Id:int}")] // api/generos/id 
-        public ActionResult<Genero> Get(int Id){
-            var genero = repositorio.obtenerGeneroPorId(Id);     
+        public async Task<ActionResult<Genero>> Get(int Id){
+            var genero =  await repositorio.obtenerGeneroPorId(Id);     
             
-            if(genero == null) return NotFound();
+            if(genero == null) return NotFound("asdfasdf");
 
             return genero;
         }
         
+        // Crear nuevo genero  ------------------------------------------
         [HttpPost]
-        public void  Post(){
-            
+        public ActionResult Post([FromBody] Genero genero){
+            return NoContent();
         }
         
         [HttpPut]
-        public void  Put(){
-            
+        public ActionResult  Put(){
+            return NoContent();
         }
         
         [HttpDelete]
-        public void  Delete(){
-            
+        public ActionResult  Delete(){
+            return NoContent();
         }
     
-
-    
-    
-    
-    }// end llaves GenerosController
+    }// end class GenerosController
 }

@@ -9,6 +9,6 @@ namespace back_end.Repositorios
     public interface IRepositorio
     {
         List<Genero> obtenerTodosLosGeneros();
-        Genero obtenerGeneroPorId(int Id);
+        Task<Genero> obtenerGeneroPorId(int Id);
     }
 }
